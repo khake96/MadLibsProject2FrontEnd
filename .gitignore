@@ -1,25 +1,46 @@
-#Learn more about Jenkins and JENKINS_HOME directory for which this file is intended.
-#  http://jenkins-ci.org/
-#  https://wiki.jenkins-ci.org/display/JENKINS/Administering+Jenkins
+# See http://help.github.com/ignore-files/ for more about ignoring files.
 
-#ignore all JENKINS_HOME except jobs directory, root xml config, and .gitignore file
-/*
-!/jobs
-!/.gitignore
-!/*.xml
+# compiled output
+/dist
+/tmp
+/out-tsc
+# Only exists if Bazel was run
+/bazel-out
 
-#ignore all files in jobs subdirectories except for folders
-#note: git doesn't track folders, only file content
-jobs/**
-!jobs/**/
+# dependencies
+/node_modules
 
-#uncomment the following line to save next build numbers with config
-#!jobs/**/nextBuildNumber
+# profiling files
+chrome-profiler-events*.json
+speed-measure-plugin*.json
 
-#exclude only config.xml files in repository subdirectories
-!config.xml
+# IDEs and editors
+/.idea
+.project
+.classpath
+.c9/
+*.launch
+.settings/
+*.sublime-workspace
 
-#don't track workspaces (when users build on the master)
-jobs/**/*workspace
+# IDE - VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+.history/*
 
-#as a result only settings and job config.xml files in JENKINS_HOME will be tracked by git
+# misc
+/.sass-cache
+/connect.lock
+/coverage
+/libpeerconnection.log
+npm-debug.log
+yarn-error.log
+testem.log
+/typings
+
+# System Files
+.DS_Store
+Thumbs.db
