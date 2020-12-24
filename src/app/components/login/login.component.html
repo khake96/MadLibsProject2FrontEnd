@@ -1,7 +1,37 @@
-<h1>Login page</h1>
-<div class="row">
-    <input id="login" type="text" [(ngModel)]='username'>
-    <input id="password" type="password" [(ngModel)]='password'>
-    <button class="btn btn-primary" (click)='login()'>Login</button>
-    <button class="btn btn-primary" routerLinkActive='active' routerLink='registration'>Registration</button>
+<div id="loginContainer">
+    <div class="container">
+        <div id="loginRow" class="row">
+            <div id="loginDescription" class="col-6">
+                <h1>Literary MadLibs</h1>
+                <p>Literary MadLibs, allowing for users to choose genres of literature and fill in the missing words.
+                </p>
+            </div>
+            <div id="loginForm" class="col-5">
+                <form>
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="email" class="form-control my-form-control" id="inputEmail"
+                                placeholder="Login">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control my-form-control" id="inputPassword"
+                                placeholder="Password">
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button id="loginButton" type="button" class="btn btn-primary btn-lg">Login</button>
+                            </div>
+                        </div>
+                        <div id="loginShortDescription"><span>Don't have an account yet?</span></div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button id="registrationButton" type="button" class="btn btn-primary btn-lg" routerLinkActive='active' routerLink='registration'>Create new
+                                    account</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
