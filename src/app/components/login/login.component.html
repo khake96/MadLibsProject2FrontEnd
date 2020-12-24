@@ -1,1 +1,7 @@
-<p>login works!</p>
+<h1>Login page</h1>
+<div class="row">
+    <input id="login" type="text" [(ngModel)]='username'>
+    <input id="password" type="password" [(ngModel)]='password'>
+    <button class="btn btn-primary" (click)='login()'>Login</button>
+    <button class="btn btn-primary" routerLinkActive='active' routerLink='registration'>Registration</button>
+</div>
