@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { LoginService } from 'src/app/services/login.service';
 
 @Component({
   selector: 'app-login',
@@ -7,9 +8,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 
-  constructor() { }
+  public loginField:string = '';
+  public passwordField:string = '';
+  public result:string = '';
+
+  constructor(private ls:LoginService) { }
 
   ngOnInit(): void {
+  }
+
+  checkLogin():void {
+    this.ls.checkLoginBE(this.loginField, this.passwordField).subscribe (
+      (data:string) =>{
+        this.result = data;
+        console.log(this.result);
+      },
+      ()=>{
+        this.result="";
+        console.log("something went wrong checking your login and password.");
+      }
+    )
   }
 
 }
