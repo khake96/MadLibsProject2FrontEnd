@@ -1,1 +1,46 @@
-<p>registration works!</p>
+<div id="registrationContainer">
+    <div class="container">
+        <div id="registrationRow" class="row">
+            <div id="registrationDescription" class="col-3">
+                <h5>Literary MadLibs</h5>
+                <p>Please create an account with us.
+                </p>
+            </div>
+            <div id="registrationForm" class="col-4">
+                <form>
+                    <fieldset>
+                        <div class="form-group">
+                            <input type="text" class="form-control my-form-control" id="newInputName"
+                                placeholder="New User Name" [(ngModel)]='registrationField' [ngModelOptions]="{standalone: true}" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control my-form-control" id="inputFirstName"
+                                placeholder="Your First Name" [(ngModel)]='firstNameField'[ngModelOptions]="{standalone: true}" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control my-form-control" id="inputLastName"
+                                placeholder="Your Last Name" [(ngModel)]='lastNameField'[ngModelOptions]="{standalone: true}" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control my-form-control" id="inputEmail"
+                                placeholder="Your Email" [(ngModel)]='emailField'[ngModelOptions]="{standalone: true}" >
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control my-form-control" id="inputPassword1"
+                                placeholder="Requested Password" [(ngModel)]='password1Field'[ngModelOptions]="{standalone: true}" >
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control my-form-control" id="inputPassword2"
+                                placeholder="Repeat Password" [(ngModel)]='password2Field'[ngModelOptions]="{standalone: true}" >
+                        </div>
+                        <div class="row">
+                            <div class="col-12">
+                                <button id="registrationButton" type="button" class="btn btn-primary btn-lg" (click)='checkRegistration()'>Register</button>
+                            </div>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
