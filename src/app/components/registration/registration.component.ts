@@ -1,4 +1,6 @@
+
 import { Component, OnInit } from '@angular/core';
+import { RegistrationService } from 'src/app/services/registration.service';
 
 @Component({
   selector: 'app-registration',
@@ -7,9 +9,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistrationComponent implements OnInit {
 
-  constructor() { }
+  public registrationField:string = '';
+  public firstNameField:string = '';
+  public lastNameField:string = '';
+  public emailField:string = '';
+  public password1Field:string = '';
+  public password2Field:string = '';
+  public result:string = '';
+
+  constructor(private rs:RegistrationService) { }
 
   ngOnInit(): void {
+  }
+
+  checkRegistration():void {
+    this.rs.checkRegistrationBE(this.registrationField, this.firstNameField,
+                                this.lastNameField,  this.emailField,
+                                this.password1Field, this.password2Field ).subscribe (
+      (data:string) =>{
+        this.result = data;
+        console.log(this.result);
+      },
+      ()=>{
+        this.result="";
+        console.log("Something went wrong with creating an account.");
+      }
+    )
   }
 
 }
