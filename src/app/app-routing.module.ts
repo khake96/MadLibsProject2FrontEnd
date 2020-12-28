@@ -6,7 +6,7 @@ import { GameComponent } from './playbox/game/game.component';
 
 const routes: Routes = [
   {
-    path:'login',
+    path:'',
     component:LoginComponent
   },
   {
