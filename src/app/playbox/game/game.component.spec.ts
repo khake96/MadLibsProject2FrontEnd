@@ -1,25 +1,31 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+//import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { GameService } from 'src/app/playbox/services/play.service'
+import { Component, OnInit } from '@angular/core';
+import { User, StoryCategory, IncompleteStory, CompleteStory };
 
-import { GameComponent } from './game.component';
+@Component({
+  selector:'app-newGame',
+  templateUrl: './game.component.html',
+  styleUrls: ['./game.component.css']
+})
+export class GameComponent implements OnInit {
+  public user:User=null;
+  public category:StoryCategory=0;
+  public inCompleteStory:IncompleteStory='';
+  public completeStory:CompleteStory='';
+  
+  constructor(private gameService:GameService) {}
+  ngOnInit():void {
+    this.gameService.getCategory(this.category).subscribe (
+      (data:number) => {
+        this.category = data;
+        console.log('chosen category: '+this.category);
+      },
+      ()=>{
+        this.category=0;
+        console.log("error in selection");
+      }
+    )
 
-describe('GameComponent', () => {
-  let component: GameComponent;
-  let fixture: ComponentFixture<GameComponent>;
-
-  beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      declarations: [ GameComponent ]
-    })
-    .compileComponents();
-  });
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(GameComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
-
-  it('should create', () => {
-    expect(component).toBeTruthy();
-  });
-});
+  }
+}
