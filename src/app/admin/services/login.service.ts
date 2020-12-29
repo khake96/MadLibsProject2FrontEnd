@@ -12,6 +12,6 @@ export class LoginService {
 
   checkLoginBE(login:string, pass:string) {
     console.log(login, pass);
-    return this.http.post<any>("", {userName:login, password:pass}) as Observable<string>;
+    return this.http.post<any>("http://localhost:8080/madlibs/login", {userName:login, password:pass}) as Observable<string>;
   }
 }
