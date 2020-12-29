@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 
 @Component({
   selector: 'app-game',
