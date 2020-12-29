@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
     this.ls.checkLoginBE(this.loginField, this.passwordField).subscribe (
       (data:string) =>{
         this.result = data;
-        console.log(this.result);
+        console.log("success!");
       },
       ()=>{
         this.result="";
