@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { TestBed } from '@angular/core/testing';
-import { LoginService } from 'src/app/admin/services/login.service';
-import { Word } from 'src/app/models/word';
-import { WordCheckerService } from 'src/app/services/word-checker.service';
+import { LoginService } from 'src/app/services/login/login.service';
+import { Word } from 'src/app/models/word/word';
+import { WordCheckerService } from 'src/app/services/word-checker/word-checker.service';
 
 @Component({
   selector: 'app-login',
