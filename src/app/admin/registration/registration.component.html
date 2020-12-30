@@ -1,12 +1,20 @@
 <div id="registrationContainer">
     <div class="container">
         <div id="registrationRow" class="row">
-            <div id="registrationDescription" class="col-3">
-                <h5>Literary MadLibs</h5>
-                <p>Please create an account with us.
+
+            C<div id="registrationDescription" class="col-6">
+                <h1>Literary MadLibs</h1>
+                <p class="subPhrase">Please create an account with us.
                 </p>
+                <div class="row">
+                    <div class="col-12">
+                        <button id="returnToLoginButton" type="button" class="btn btn-primary btn-lg" routerLinkActive='active' 
+                                routerLink=''>Return to Login</button>
+                    </div>
+                </div>
             </div>
-            <div id="registrationForm" class="col-4">
+
+            <div id="registrationForm" class="col-5">
                 <form>
                     <fieldset>
                         <div class="form-group">
@@ -26,6 +34,14 @@
                                 placeholder="Your Email" [(ngModel)]='emailField'[ngModelOptions]="{standalone: true}" >
                         </div>
                         <div class="form-group">
+                            <input type="text" class="form-control my-form-control" id="inputDob"
+                                placeholder="Year You Were Born" [(ngModel)]='dobField'[ngModelOptions]="{standalone: true}" >
+                        </div>
+                        <div class="form-group">
+                            <input type="text" class="form-control my-form-control" id="inputPlayLevel"
+                                placeholder="Play Level" [(ngModel)]='levelField'[ngModelOptions]="{standalone: true}" >
+                        </div>
+                        <div class="form-group">
                             <input type="password" class="form-control my-form-control" id="inputPassword1"
                                 placeholder="Requested Password" [(ngModel)]='password1Field'[ngModelOptions]="{standalone: true}" >
                         </div>
@@ -33,12 +49,12 @@
                             <input type="password" class="form-control my-form-control" id="inputPassword2"
                                 placeholder="Repeat Password" [(ngModel)]='password2Field'[ngModelOptions]="{standalone: true}" >
                         </div>
-                        <div class="row">
+                        <div class="form-group">
                             <div class="col-12">
-                                <button id="registrationButton" type="button" class="btn btn-primary btn-lg" (click)='checkRegistration()'>Register</button>
+                                <button id="registrationButton" type="button" class="btn btn-primary btn-lg" (click)='goRegistration()'>Register</button>
                             </div>
                         </div>
-                    </fieldset>
+                     </fieldset>
                 </form>
             </div>
         </div>

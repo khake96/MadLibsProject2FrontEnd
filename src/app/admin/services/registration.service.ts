@@ -10,9 +10,15 @@ export class RegistrationService {
 
   constructor(private http:HttpClient) { }
 
-  checkRegistrationBE(reg:string, fname:string, lname:string, email:string, pass1:string, pass2:string ) {
-    console.log(reg, fname, lname, email, pass1, pass2);
-    return this.http.post<any>("", {userName:reg, firstName:fname, lastName:lname,
-                                    email:email,  password1:pass1,  password2:pass2}) as Observable<string>;
+  checkRegistrationBE(newUserName:string, fstName:string, lstName:string,
+                      email:string, dob:string, level:string, passwd1:string,
+                      passwd2:string ) {
+
+    console.log(newUserName, fstName, lstName, email, dob, level, passwd1, passwd2);
+
+    return this.http.post<any>("", {userName:newUserName, firstName:fstName,
+                                    lastName:lstName, email:email,  
+                                    yob:dob, playerLevel:level,
+                                    password1:passwd1,  password2:passwd2}) as Observable<string>;
   }
 }

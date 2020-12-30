@@ -13,6 +13,8 @@ export class RegistrationComponent implements OnInit {
   public firstNameField:string = '';
   public lastNameField:string = '';
   public emailField:string = '';
+  public dobField:string = '';
+  public levelField:string = '';
   public password1Field:string = '';
   public password2Field:string = '';
   public result:string = '';
@@ -22,9 +24,10 @@ export class RegistrationComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  checkRegistration():void {
+  goRegistration():void {
     this.rs.checkRegistrationBE(this.registrationField, this.firstNameField,
                                 this.lastNameField,  this.emailField,
+                                this.dobField,  this.levelField,
                                 this.password1Field, this.password2Field ).subscribe (
       (data:string) =>{
         this.result = data;
