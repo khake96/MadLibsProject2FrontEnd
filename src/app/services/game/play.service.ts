@@ -28,7 +28,7 @@ export class PlayService {
     return this.http.get(`${this.url}/read`) as Observable<CompleteStory[]>;
   }
 
-  rankStories(story:CompleteStory): Observable<CompleteStory> {
-    return this.http.patch(`${this.url}/updaterank`, story) as Observable<CompleteStory>;
+  rankStories(story:CompleteStory): Observable<CompleteStory[]> {
+    return this.http.patch(`${this.url}/updaterank`, story) as Observable<CompleteStory[]>;
   }
 }

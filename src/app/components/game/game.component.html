@@ -1,12 +1,12 @@
 <h1>Welcome to Literary Madlibs Game</h1>
 <div id="gameContainer">
   <div class="container">
-      <div id="categoryRow" class="row">
+      <div id="selectCategoryRow" class="row">
         <fieldset>
           <legend>Please choose a genre to begin play:</legend>
           <div class="form-group">
             <select class="custom-select">
-              <option selected="">Open this select menu</option>
+              <option selected="">Choose a Category</option>
               <option value="1">British Literature</option>
               <option value="2">Russian Literature</option>
               <option value="3">Early American</option>
@@ -14,7 +14,7 @@
           </div>
         </fieldset>
       </div>
-      <div id="wordRow" class="row">
+      <div id="enterWordsRow" class="row">
 
         <!--Here is our regular large input-->
  <!--   <div class="form-group">
@@ -29,7 +29,7 @@
         </div>   -->
 
         <div class="form-group has-success">
-          <label class="form-control-label" for="inputValid">Please enter a {{word}}</label>
+          <label class="form-control-label" for="inputValid">Please enter a {{word.fl}}</label>
           <input type="text" value="correct value" class="form-control form-control-lg is-valid" [(ngModel)]="word" id="inputValid">
           <div class="valid-feedback">{{Success! You've done it.}}</div>
         </div>
@@ -38,12 +38,42 @@
       <div id="showStoryRow" class="row">
         <div class="jumbotron">
           <h3 class="display-3">Woo-hoo! Success!</h3>
-          <p class="lead">Click "Save" below to preserve this story for posterity and share it with your friends!</p>
+          <p class="lead">{{filledStoryString}}</p>
           <hr class="my-4">
-          <p>{{completedStoryText}}</p>
+          <p>Click "Save" below to preserve this story for posterity and share it with your friends!</p>
           <p class="lead">
             <span><a class="btn btn-primary btn-lg" (click)="saveCompletedStory()" role="button">Save</a>
             <button type="button" class="btn btn-secondary">Discard Story</button></span>
+          </p>
+        </div>
+      </div>
+      <div id="completedStorySelectRow" class ="row">
+        <table class="table table-hover table-striped">
+          <thead>
+            <tr>
+              <th scope="col">Genre</th>
+              <th scope="col">Author</th>
+              <th scope="col">The "altered" text.</th>
+              <th scope="col">Rating</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let s of stories">
+              <th scope="row">{{s.parentStoryGenre}}</th>
+              <td>{{s.completerName}}</td>
+              <td>{{s.incompleteStory}}</td>
+              <td>{{s.upVoteCount}}</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div id="completedStoryFullViewRow" class="row">
+        <div class="jumbotron">
+          <p class="lead">{{s.completeStory}}</p>
+          <hr class="my-4">
+          <p>Author: {{s.completerName}}       Current Rating: {{s.upVoteCount}}</p>
+          <p class="lead">
+            <a class="btn btn-primary" (click)="saveStoryRanking()" role="button">Give A Star!</a>
           </p>
         </div>
       </div>
