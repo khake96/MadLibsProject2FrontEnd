@@ -72,4 +72,8 @@ export class GameComponent implements OnInit {
     // added. 
   }
 
+  sendWord() {
+    
+  }
+
 }

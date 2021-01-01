@@ -30,19 +30,19 @@
 
         <div class="form-group has-success">
           <label class="form-control-label" for="inputValid">Please enter a {{word.fl}}</label>
-          <input type="text" value="correct value" class="form-control form-control-lg is-valid" [(ngModel)]="word" id="inputValid">
-          <div class="valid-feedback">{{Success! You've done it.}}</div>
+          <input type="text" value="correct value" class="form-control form-control-lg is-valid" id="[(ngModel)]=word">
+          <div class="valid-feedback">Success! You've done it.</div>
         </div>
-        <button (click)="sendWord()" type="button" class="btn btn-primary btn-lg">Submit</button>
+        <button id="checkWord()" type="button" class="btn btn-primary btn-lg">Submit</button>
       </div>
       <div id="showStoryRow" class="row">
         <div class="jumbotron">
           <h3 class="display-3">Woo-hoo! Success!</h3>
-          <p class="lead">{{filledStoryString}}</p>
+          <p class="lead">filledStoryString</p>
           <hr class="my-4">
           <p>Click "Save" below to preserve this story for posterity and share it with your friends!</p>
           <p class="lead">
-            <span><a class="btn btn-primary btn-lg" (click)="saveCompletedStory()" role="button">Save</a>
+            <span><a class="btn btn-primary btn-lg" (click)=" saveNewCompleteStory()" role="button">Save</a>
             <button type="button" class="btn btn-secondary">Discard Story</button></span>
           </p>
         </div>
@@ -59,19 +59,19 @@
           </thead>
           <tbody>
             <tr *ngFor="let s of stories">
-              <th scope="row">{{s.parentStoryGenre}}</th>
-              <td>{{s.completerName}}</td>
-              <td>{{s.incompleteStory}}</td>
-              <td>{{s.upVoteCount}}</td>
+              <th scope="row">s.parentStoryGenre</th>
+              <td>s.completerName</td>
+              <td>s.incompleteStory</td>
+              <td>s.upVoteCount</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div id="completedStoryFullViewRow" class="row">
         <div class="jumbotron">
-          <p class="lead">{{s.completeStory}}</p>
+          <p class="lead">s.completeStory</p>
           <hr class="my-4">
-          <p>Author: {{s.completerName}}       Current Rating: {{s.upVoteCount}}</p>
+          <p>Author: s.completerName       Current Rating: s.upVoteCount</p>
           <p class="lead">
             <a class="btn btn-primary" (click)="saveStoryRanking()" role="button">Give A Star!</a>
           </p>
