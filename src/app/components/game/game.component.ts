@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { Globals } from 'src/app/globals';
 import { PlayService } from 'src/app/services/game/play.service';
 import { Word } from 'src/app/models/word/word';
 import { User } from 'src/app/models/user/user'
 import { IncompleteStory } from 'src/app/models/incomplete-story/incompletestory';
 import { CompleteStory } from 'src/app/models/complete-story/completestory';
-import { StoryCategory } from 'src/app/models/story-category/storycategory';
 
 @Component({
   selector: 'app-game',
@@ -15,7 +15,6 @@ import { StoryCategory } from 'src/app/models/story-category/storycategory';
 export class GameComponent implements OnInit {
 
   playServer: PlayService;
-  newCategory: StoryCategory;
   newIncompleteStory: IncompleteStory;
   //newCompleteStory: CompleteStory;
   displayCompleteStory: CompleteStory;
@@ -27,14 +26,15 @@ export class GameComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+
   }
 
   getIncompleteStory() {
-    this.playServer.getStory(this.newCategory).subscribe(
-     (response: IncompleteStory) => {
-       this.newIncompleteStory = response;
-     } 
-    )
+    // this.playServer.getStory(this.newCategory).subscribe(
+    //  (response: IncompleteStory) => {
+    //    this.newIncompleteStory = response;
+    //  } 
+    // )
     // TODO add parsing of the new story to give appropriate prompts
     // TODO When prompting complete, display completed story to reader
   }
@@ -72,8 +72,8 @@ export class GameComponent implements OnInit {
     // added. 
   }
 
-  sendWord() {
-    
+  checkWord() {
+
   }
 
 }

@@ -1,0 +1,10 @@
+<div id="selectCategoryRow" class="row" *ngIf="showSelectCategoryRow"> 
+    <fieldset>
+      <legend>Please choose a genre to begin play:</legend>
+      <div class="form-group"> 
+        <select class="custom-select"  [(ngModel)]="inputCategories" (ngModelChange)="getIncomplete(inputCategories, globals.user)">
+          <option *ngFor="let desc of inputCategories">{{inputCategories.desc}} </option>  
+        </select>
+      </div>
+    </fieldset>
+  </div>

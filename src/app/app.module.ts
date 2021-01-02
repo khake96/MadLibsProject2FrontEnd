@@ -9,13 +9,15 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
+import { CategorySelectorComponent } from './components/category-selector/category-selector.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     RegistrationComponent,
-    MenuBarComponent
+    MenuBarComponent,
+    CategorySelectorComponent
   ],
   imports: [
     BrowserModule,
