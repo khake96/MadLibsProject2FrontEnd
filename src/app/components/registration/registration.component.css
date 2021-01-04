@@ -1,0 +1,72 @@
+#registrationRow {
+    justify-content: center;
+    align-items: center;
+    padding: 50px 0;
+}
+
+#registrationDescription {
+    align-items: center;
+}
+
+.my-form-control {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.subPhrase {
+    color: #879b59;
+}
+
+#registrationForm {
+    padding: 60px 40px;
+    background-color: #ffffff54;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 5px;
+}
+
+#registrationButton {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 20px;
+    border-radius: 15px;
+}
+
+#registrationButton {
+    background-color: #2b3e50;
+    border-color: #2b3e50;
+    display: block;
+    width: 60%;
+    margin-top: 20px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border-radius: 15px;
+}
+
+#registrationButton:hover {
+    background-color: #1e2b38;
+    border-color: #1e2b38;
+}
+
+#registrationDescription {
+    margin-right: 40px;
+}
+
+#registrationDescription h1{
+    color: #248f5a;
+    font-size: 4rem;
+    font-family: 'Roboto';
+}
+
+#registrationContainer {
+    background-image: url('../../../assets/images/loginBackground.jpg');
+    background-size: cover;
+    height: 100vh;
+}

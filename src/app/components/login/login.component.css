@@ -1,0 +1,78 @@
+#loginRow {
+    justify-content: center;
+    align-items: center;
+    padding: 100px 0;
+}
+
+#loginDescription {
+    align-items: center;
+}
+
+.my-form-control {
+    padding-top: 15px;
+    padding-bottom: 15px;
+    font-size: 18px;
+    border-radius: 10px;
+}
+
+.subPhrase {
+    color: #879b59;
+}
+
+#loginForm {
+    padding: 60px 40px;
+    background-color: #ffffff54;
+    border-radius: 10px;
+}
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+#loginButton {
+    display: block;
+    width: 100%;
+    margin-bottom: 15px;
+    margin-top: 10px;
+    border-radius: 15px;
+}
+
+#loginShortDescription {
+    text-align: center;
+    margin-bottom: 10px;
+    color: #ffffffc2;
+}
+
+#registrationButton {
+    background-color: #2b3e50;
+    border-color: #2b3e50;
+    display: block;
+    width: 60%;
+    margin-top: 40px;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    border-radius: 15px;
+}
+
+#registrationButton:hover {
+    background-color: #1e2b38;
+    border-color: #1e2b38;
+}
+
+#loginDescription {
+    margin-right: 40px;
+}
+
+#loginDescription h1{
+    color: #de6b3d;
+    font-size: 4rem;
+    font-family: 'Roboto';
+}
+
+#loginContainer {
+    background-image: url('../../../assets/images/loginBackground.jpg');
+    background-size: cover;
+    height: 100vh;
+}
