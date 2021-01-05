@@ -23,7 +23,6 @@ export class RegistrationComponent implements OnInit {
   constructor(private rs:RegistrationService) { }
 
   ngOnInit(): void { }
-  selectChangeHandler(event:any){ this.levelField = event.target.value;}
 
   goRegistration():void {
     
