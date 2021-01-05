@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { Word } from '../../models/word/word';
 import { map } from 'rxjs/operators';
 import { Noun } from 'src/app/models/word/noun';
+import { Verb } from 'src/app/models/word/verb';
 
 
 @Injectable({
@@ -11,62 +12,92 @@ import { Noun } from 'src/app/models/word/noun';
 })
 export class WordCheckerService {
 
-  public words:Word[] = null;
+  public words: Word = null;
+  public words2: Word = null;
   public result: string = '';
-  public nouns:Noun = new Noun();
+  public nouns: Noun = new Noun();
+  public verbs: Verb = new Verb();
+  public nounsArr: Noun[] = new Array;
+  public verbsArr: Verb[] = new Array;
 
-  constructor(private http:HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   //Return all information about this word
-  checkWord(word:String):Observable<Word> {
-    return this.http.get<any>('https://dictionaryapi.com/api/v3/references/thesaurus/json/'+ word + '?key=e618ff16-ba5b-484a-8f1c-7c0928281c22') as Observable<Word>;
+  getCollegiateAPI(word: string): Observable<Word> {
+    return this.http.get<any>('https://dictionaryapi.com/api/v3/references/collegiate/json/' + word + '?key=7908a05a-c765-4327-a810-55d6bf1591ec') as Observable<Word>;
   }
 
+  getThesaurusAPI(word: string): Observable<Word> {
+    return this.http.get<any>('https://dictionaryapi.com/api/v3/references/thesaurus/json/' + word + '?key=e618ff16-ba5b-484a-8f1c-7c0928281c22') as Observable<Word>;
+  }
 
-  // public getNoun(word:String):Observable<Word[]> {
-  //   return this.http
-  //     .get('https://dictionaryapi.com/api/v3/references/thesaurus/json/'+ word + '?key=e618ff16-ba5b-484a-8f1c-7c0928281c22')
-  //     .pipe(map(response => {
-  //       const properties = response;
-  //       return properties.map((fl: String, sls: String) => new Word(fl, sls));
-  //     }))
-  // }
+  getNoun(word: string): Noun[] {
+    this.getCollegiateAPI(word).subscribe(
+      (data: Word) => {
+        this.words = data;
+        for (var i in this.words) {
+          let newObj: Noun = new Noun();
+          if (this.words[i].fl == "noun") {
 
-  // return noun
-  // getNoun(word:String):Word[] {
-  //   var result:Word[];
-  //   this.checkWord(word).subscribe (
-  //     (data:any)=>{
-  //       result = data;
-  //       console.log(result[0].sls[0]);
-  //       console.log(result[0].fl);
-        
-  //     }
-  //   )
-  //   return result;
-  // }
+            this.nouns.fl = "noun";
+            if (this.words[i].ins) {
+              if (this.words[i].ins[0].il == "plural") {
+                this.nouns.sls = "plural";
+              }
+            } else {
+              this.nouns.sls = "singular";
+            }
+            let regExp: RegExp = /(^[^:]*)/;
+            this.nouns.orig = regExp.exec(this.words[i].meta.id)[1];
 
-  // getNoun(word:string):void {
-  //   this.checkWord(word).subscribe (
-  //     (data:Word)=>{
-  //       this.words = data;
-  //       for (var i in this.words) {
-  //         if (this.words[i].fl == "noun") { 
-  //           this.nouns.fl = this.words[i].fl;
-  //           if (this.words[i].sls) {
-  //             this.nouns.sls = "plural";
-  //             let regExp:RegExp = /\|([^|]+)\|/;
-  //             this.nouns.orig = regExp.exec(this.words[i].sls)[1];
-  //             console.log(this.nouns);
-  //           }
+            newObj.fl = this.nouns.fl;
+            newObj.sls = this.nouns.sls;
+            newObj.orig = this.nouns.orig;
+            this.nounsArr.push(newObj);
+          }
+
+        }
+      },
+      () => {
+        this.words = null;
+        console.log("something went wrong trying to get your word");
+      }
+    )
+    return this.nounsArr;
+  }
+
+  getVerb(word: string): Verb[] {
+    this.getThesaurusAPI(word).subscribe(
+      (data: Word) => {
+        this.words = data;
+        for (var i in this.words) {
+
+          let newObj: Verb = new Verb();
+          if (this.words[i].fl == "verb") {
+
+            this.verbs.fl = "verb";
+
+            if (this.words[i].sls) {
+              this.verbs.sls = this.words[i].sls[0];
+
+              let regExp: RegExp = /\|(.*)\|/;
+              this.verbs.orig = regExp.exec(this.words[i].sls)[1];
+            } 
             
-  //         }
-  //       }
-  //     },
-  //     ()=>{
-  //       this.words = null;
-  //       console.log("something went wrong trying to get your word");
-  //     }
-  //   )
-  // }
+
+            newObj.fl = this.verbs.fl;
+            newObj.sls = this.verbs.sls;
+            newObj.orig = this.verbs.orig;
+            this.verbsArr.push(newObj);
+          }
+        }
+
+      },
+      () => {
+        this.words = null;
+        console.log("something went wrong trying to get your word");
+      }
+    )
+    return this.verbsArr;
+  }
 }

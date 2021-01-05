@@ -25,14 +25,11 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     // This's return Noun
-    this.ls.getNoun('words');
-    
+    // console.log(this.wc.getNoun('process'));
+    // console.log(this.wc.getVerb('process'));
   }
 
-  
-
   checkLogin(): void {
-
     this.ls.checkLoginBE(this.loginField, this.passwordField).subscribe(
       (data: string) => {
         this.result = data;
@@ -44,29 +41,4 @@ export class LoginComponent implements OnInit {
       }
     )
   }
-
-  // getNoun(word:string):void {
-  //   this.wc.checkWord(word).subscribe (
-  //     (data:Word)=>{
-  //       this.words = data;
-  //       for (var i in this.words) {
-  //         if (this.words[i].fl == "noun") { 
-  //           this.nouns.fl = this.words[i].fl;
-  //           if (this.words[i].sls) {
-  //             this.nouns.sls = "plural";
-  //             let regExp:RegExp = /\|([^|]+)\|/;
-  //             this.nouns.orig = regExp.exec(this.words[i].sls)[1];
-  //             console.log(this.nouns);
-  //           }
-            
-  //         }
-  //       }
-  //     },
-  //     ()=>{
-  //       this.words = null;
-  //       console.log("something went wrong trying to get your word");
-  //     }
-  //   )
-  // }
-
 }

@@ -10,6 +10,9 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { MenuBarComponent } from './components/menu-bar/menu-bar.component';
 import { CategorySelectorComponent } from './components/category-selector/category-selector.component';
+import { GameComponent } from './components/game/game.component';
+import { ReadComponent } from './components/read/read.component';
+import { UpdateComponent } from './components/update/update.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +20,10 @@ import { CategorySelectorComponent } from './components/category-selector/catego
     LoginComponent,
     RegistrationComponent,
     MenuBarComponent,
-    CategorySelectorComponent
+    CategorySelectorComponent,
+    GameComponent,
+    ReadComponent,
+    UpdateComponent
   ],
   imports: [
     BrowserModule,
