@@ -63,39 +63,39 @@ export class WordCheckerService {
     return this.nounsArr;
   }
 
-  getVerb(word: string): Verb[] {
-    this.getThesaurusAPI(word).subscribe(
-      (data: Word) => {
-        this.words = data;
-        for (var i in this.words) {
+  // getVerb(word: string): Verb[] {
+  //   this.getThesaurusAPI(word).subscribe(
+  //     (data: Word) => {
+  //       this.words = data;
+  //       for (var i in this.words) {
 
-          let newObj: Noun = new Noun();
-          if (this.words[i].fl == "noun") {
+  //         let newObj: Noun = new Noun();
+  //         if (this.words[i].fl == "noun") {
 
-            this.nouns.fl = "noun";
-            if (this.words[i].ins) {
-              if (this.words[i].ins[0].il == "plural") {
-                this.nouns.sls = "plural";
-              }
-            } else {
-              this.nouns.sls = "singular";
-            }
-            let regExp: RegExp = /(^[^:]*)/;
-            this.nouns.orig = regExp.exec(this.words[i].meta.id)[1];
+  //           this.nouns.fl = "noun";
+  //           if (this.words[i].ins) {
+  //             if (this.words[i].ins[0].il == "plural") {
+  //               this.nouns.sls = "plural";
+  //             }
+  //           } else {
+  //             this.nouns.sls = "singular";
+  //           }
+  //           let regExp: RegExp = /(^[^:]*)/;
+  //           this.nouns.orig = regExp.exec(this.words[i].meta.id)[1];
 
-            newObj.fl = this.nouns.fl;
-            newObj.sls = this.nouns.sls;
-            newObj.orig = this.nouns.orig;
-            this.nounsArr.push(newObj);
-          }
-        }
-        
-      },
-      () => {
-        this.words = null;
-        console.log("something went wrong trying to get your word");
-      }
-    )
-    return this.nounsArr;
-  }
+  //           newObj.fl = this.nouns.fl;
+  //           newObj.sls = this.nouns.sls;
+  //           newObj.orig = this.nouns.orig;
+  //           this.nounsArr.push(newObj);
+  //         }
+  //       }
+
+  //     },
+  //     () => {
+  //       this.words = null;
+  //       console.log("something went wrong trying to get your word");
+  //     }
+  //   )
+  //   return this.nounsArr;
+  // }
 }
