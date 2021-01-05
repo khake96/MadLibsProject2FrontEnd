@@ -31,6 +31,7 @@ export class PlayService {
   }
 
   readStories(): Observable<CompleteStory[]> {
+    // return this.http.get(`${this.url}/read`) as Observable<CompleteStory[]>;
     return this.http.get(`${this.url}/read`) as Observable<CompleteStory[]>;
   }
 

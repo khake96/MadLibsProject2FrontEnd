@@ -25,8 +25,8 @@ export class LoginComponent implements OnInit {
   ngOnInit(): void {
 
     // This's return Noun
-    console.log(this.wc.getNoun('process'));
-    console.log(this.wc.getVerb('process'));
+    // console.log(this.wc.getNoun('process'));
+    // console.log(this.wc.getVerb('process'));
   }
 
   checkLogin(): void {

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, NgModule, OnInit } from '@angular/core';
 import { Globals } from 'src/app/globals';
 import { PlayService } from 'src/app/services/game/play.service';
 import { Word } from 'src/app/models/word/word';
