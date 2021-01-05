@@ -12,7 +12,13 @@ import { CompleteStory } from 'src/app/models/complete-story/completestory';
   styleUrls: ['./game.component.css']
 })
 
+
+
 export class GameComponent implements OnInit {
+
+  public word1:string;
+  public word2:string;
+  public word3:string;
 
   playServer: PlayService;
   newIncompleteStory: IncompleteStory;
@@ -76,4 +82,8 @@ export class GameComponent implements OnInit {
 
   }
 
+
+  // console.log(word1);
+  // console.log(word2);
+  // console.log(word3);
 }

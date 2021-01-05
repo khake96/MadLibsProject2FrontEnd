@@ -2,21 +2,46 @@
 <!-- <h1>Welcome to Literary Madlibs Game</h1> -->
 <div class="container">
   <div id="gameContainer">
-    <div id="enterWordsRow" class="row">
+    <div class="row">
+      <div class="col-12">
+        <h3>Please input the words</h3>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12">
+        <p class="form-control-label">Please enter words</p>
+      </div>
+      <div class="col-4">
+        <input type="text" placeholder="Noun" class="form-control form-control-lg" id="[(ngModel)]=word1">
+      </div>
+      <div class="col-4">
+        <input type="text" placeholder="Noun" class="form-control form-control-lg" id="[(ngModel)]=word2">
+      </div>
+      <div class="col-4">
+        <input type="text" placeholder="Noun" class="form-control form-control-lg" id="[(ngModel)]=word3">
+      </div>
+    </div>
+    <div class="row">
+      <div clss="col-12">
+        <button id="getComplietedStory" type="button" class="btn btn-primary btn-lg" (click)='getStory()'>Get Story</button>
+      </div>
+    </div>
 
-      <!--Here is our regular large input-->
-        <!-- <div class="form-group">
+
+
+    <!--Here is our regular large input-->
+    <!-- <div class="form-group">
           <input class="form-control form-control-lg" type="text" placeholder=".form-control-lg" id="inputLarge">
         </div>  -->
 
-      <!--Here is our failure case input-->
-        <!-- <div class="form-group has-danger">
+    <!--Here is our failure case input-->
+    <!-- <div class="form-group has-danger">
           <label class="form-control-label" for="inputInvalid">Invalid input</label>
           <input type="text" value="wrong value" class="form-control is-invalid" id="inputInvalid">
           <div class="invalid-feedback">Sorry, that username's taken. Try another?</div>
         </div>   -->
 
-      <div class="form-group has-success">
+    <!-- <div class="form-group has-success">
         <label class="form-control-label" for="inputValid">Please enter a {{word}}</label>
         <input type="text" value="correct value" class="form-control form-control-lg is-valid" id="[(ngModel)]=word">
         <div class="valid-feedback">Success! You've done it.</div>
@@ -35,8 +60,8 @@
         </p>
       </div>
     </div>
-    <div id="completedStorySelectRow" class="row">
-      <table class="table table-hover table-striped">
+    <div id="completedStorySelectRow" class="row"> -->
+    <!-- <table class="table table-hover table-striped">
         <thead>
           <tr>
             <th scope="col">Genre</th>
@@ -44,8 +69,8 @@
             <th scope="col">The "altered" text.</th>
             <th scope="col">Rating</th>
           </tr>
-        </thead>
-        <!-- <tbody>
+        </thead> -->
+    <!-- <tbody>
           <tr *ngFor="let s of stories">
             <th scope="row">s.parentStoryGenre</th>
             <td>s.completerName</td>
@@ -53,9 +78,9 @@
             <td>s.upVoteCount</td>
           </tr>
         </tbody> -->
-      </table>
-    </div>
-    <div id="completedStoryFullViewRow" class="row">
+    <!-- </table>
+    </div> -->
+    <!-- <div id="completedStoryFullViewRow" class="row">
       <div class="jumbotron">
         <p class="lead">s.completeStory</p>
         <hr class="my-4">
@@ -64,6 +89,6 @@
           <a class="btn btn-primary" (click)="saveStoryRanking()" role="button">Give A Star!</a>
         </p>
       </div>
-    </div>
+    </div> -->
   </div>
 </div>
