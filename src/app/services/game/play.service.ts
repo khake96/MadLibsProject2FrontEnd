@@ -18,6 +18,10 @@ export class PlayService {
 
   constructor(private http: HttpClient) { }
 
+  // getStory(category:StoryCategory): Observable<IncompleteStory> {
+  //   return this.http.get(`${this.url}/incomplete/${category}`) as Observable<IncompleteStory>;
+  // }
+
   getStory(category:StoryCategory): Observable<IncompleteStory> {
     return this.http.get(`${this.url}/incomplete/${category}`) as Observable<IncompleteStory>;
   }
