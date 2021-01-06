@@ -3,10 +3,13 @@ import { Routes, RouterModule } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
 import { RegistrationComponent } from './components/registration/registration.component';
 import { GameComponent } from './components/game/game.component';
+import { UpdateComponent } from './components/update/update.component';
+import { ReadComponent } from './components/read/read.component';
 
 const routes: Routes = [
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   {
-    path:'',
+    path:'login',
     component:LoginComponent
   },
   {
@@ -16,6 +19,14 @@ const routes: Routes = [
   {
     path:'game',
     component:GameComponent
+  },
+  {
+    path:'update',
+    component:UpdateComponent
+  },
+  {
+    path:'read',
+    component:ReadComponent
   }
 ];
 
@@ -23,4 +34,6 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule { }
+export class AppRoutingModule { 
+
+}
