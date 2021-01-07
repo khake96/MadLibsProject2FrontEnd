@@ -16,9 +16,9 @@ import { CompleteStory } from 'src/app/models/complete-story/completestory';
 
 export class GameComponent implements OnInit {
 
-  public word1:string;
-  public word2:string;
-  public word3:string;
+  public word1: string;
+  public word2: string;
+  public word3: string;
 
   playServer: PlayService;
   newIncompleteStory: IncompleteStory;
@@ -29,21 +29,29 @@ export class GameComponent implements OnInit {
   user: User;
   word: Word;
 
-  constructor() { }
+  constructor(private ps: PlayService) { }
 
   ngOnInit(): void {
 
   }
 
-  getIncompleteStory() {
-    // this.playServer.getStory(this.newCategory).subscribe(
-    //  (response: IncompleteStory) => {
-    //    this.newIncompleteStory = response;
-    //  } 
-    // )
-    // TODO add parsing of the new story to give appropriate prompts
-    // TODO When prompting complete, display completed story to reader
-  }
+  // getCompleteStories() {
+  //   this.ps. getAllCompletedStories().subscribe(
+  //     (response:CompleteStory[]) => {
+  //       this.trainers = response;
+  //     }
+  //   )
+  // }
+
+  // getIncompleteStory() {
+  // this.playServer.getStory(this.newCategory).subscribe(
+  //  (response: IncompleteStory) => {
+  //    this.newIncompleteStory = response;
+  //  } 
+  // )
+  // TODO add parsing of the new story to give appropriate prompts
+  // TODO When prompting complete, display completed story to reader
+  // }
 
   saveNewCompleteStory() {
     this.playServer.saveCompleteStory(this.displayCompleteStory).subscribe(
