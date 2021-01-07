@@ -31,21 +31,18 @@ export class WordCheckerService {
     return this.http.get<any>('https://dictionaryapi.com/api/v3/references/thesaurus/json/' + word + '?key=e618ff16-ba5b-484a-8f1c-7c0928281c22') as Observable<Word>;
   }
 
-  getNoun(word: string): Noun[] {
-    this.getCollegiateAPI(word).subscribe(
+  getNoun(word: string) {
+    return this.getThesaurusAPI(word).pipe(map(
       (data: Word) => {
         this.words = data;
         for (var i in this.words) {
           let newObj: Noun = new Noun();
           if (this.words[i].fl == "noun") {
-
             this.nouns.fl = "noun";
-            if (this.words[i].ins) {
-              if (this.words[i].ins[0].il == "plural") {
-                this.nouns.sls = "plural";
-              }
+            if (this.words[i].sls) {
+              this.nouns.sls = "plural noun";
             } else {
-              this.nouns.sls = "singular";
+              this.nouns.sls = "singular noun";
             }
             let regExp: RegExp = /(^[^:]*)/;
             this.nouns.orig = regExp.exec(this.words[i].meta.id)[1];
@@ -57,14 +54,55 @@ export class WordCheckerService {
           }
 
         }
+        return this.nounsArr;
       },
       () => {
         this.words = null;
         console.log("something went wrong trying to get your word");
       }
-    )
-    return this.nounsArr;
+    ))
+    // return this.nounsArr;
   }
+
+  // getNoun1(word: string) {
+  //   let result:string = '';
+  //   return this.getThesaurusAPI(word).pipe(map(
+  //     (data: Word) => {
+  //       for (var i in data) {
+  //         if (data[i].fl == "noun") {
+  //           if (data[i].sls) {
+  //             return "plural noun";
+  //           } else {
+  //             return "singular noun";
+  //           }
+  //         }
+  //       }
+  //     },
+  //     () => {
+  //       console.log("something went wrong trying to get your word");
+  //     }
+  //   ))
+  // }
+
+  // getNoun2(word: string) {
+  //   let result:string = '';
+  //   return this.getThesaurusAPI(word).subscribe(
+  //     (data: Word) => {
+  //       for (var i in data) {
+  //         if (data[i].fl == "noun") {
+  //           if (data[i].sls) {
+  //             return "plural noun";
+  //           } else {
+  //             return "singular noun";
+  //           }
+  //         }
+  //       }
+  //     },
+  //     () => {
+  //       console.log("something went wrong trying to get your word");
+  //     }
+  //   )
+  // }
 
   getVerb(word: string): Verb[] {
     this.getThesaurusAPI(word).subscribe(
@@ -82,8 +120,8 @@ export class WordCheckerService {
 
               let regExp: RegExp = /\|(.*)\|/;
               this.verbs.orig = regExp.exec(this.words[i].sls)[1];
-            } 
-            
+            }
+
 
             newObj.fl = this.verbs.fl;
             newObj.sls = this.verbs.sls;

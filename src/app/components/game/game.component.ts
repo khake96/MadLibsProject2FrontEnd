@@ -8,6 +8,8 @@ import { CompleteStory } from 'src/app/models/complete-story/completestory';
 import { WordService } from 'src/app/services/game/word.service';
 import { stringify } from '@angular/compiler/src/util';
 import { HttpClient } from '@angular/common/http';
+import { WordCheckerService } from 'src/app/services/word-checker/word-checker.service';
+import { Noun } from 'src/app/models/word/noun';
 
 @Component({
   selector: 'app-game',
@@ -19,109 +21,139 @@ import { HttpClient } from '@angular/common/http';
 
 export class GameComponent implements OnInit {
 
-  public word1: string = '';
-  public word2: string = '';
-  public word3: string = '';
-  words: string[] = new Array();
-
-  public incompStory: string = '';
+  public words: string[] = new Array();
+  public missedWords: string[] = Array();
+  public typeOfInputWords: string[] = Array();
+  public newIncompleteStory: IncompleteStory = new IncompleteStory();
   public newCompoleteStory: string = '';
-  newIncompleteStory: IncompleteStory = new IncompleteStory();
-
+  public incompStory: string = '';
   public isHidden: boolean = true;
 
-  // playServer: PlayService;
-  // newIncompleteStory: IncompleteStory;
-  //newCompleteStory: CompleteStory;
-  displayCompleteStory: CompleteStory;
-  completedStories: CompleteStory[];
-  rankedCompleteStory: CompleteStory;
-  user: User;
-  word: Word;
-
-  constructor(private http: HttpClient, private ps: PlayService) { }
+  constructor(private ps: PlayService, private wc: WordCheckerService, private http: HttpClient) { }
 
   ngOnInit(): void {
-
+    //Get random story
     this.ps.getStory(1).subscribe(
       (response: IncompleteStory) => {
         this.newIncompleteStory = response;
       }
     )
 
+    if (this.words[0] == "lol") {
+      console.log("lol");
+    }
   }
 
   startGame() {
+    console.log(this.wc.getNoun("components"));
     //Get incomplete story 
     this.incompStory = this.newIncompleteStory.incompleteStory;
 
     //Get array with missed type of words
-    let arr: string[] = this.ps.getMissedType(this.incompStory);
-    console.log(arr);
-
-    //Create input fields in html = arr[]
-
+    this.missedWords = this.ps.getMissedType(this.incompStory);
   }
-
-  // getIncompleteStory(id: number): IncompleteStory {
-  //   this.ps.getStory(id).subscribe(
-  //     (response: IncompleteStory) => {
-  //       this.newIncompleteStory = response;
-  //     }
-  //   )
-  //   return this.newIncompleteStory;
-  // }
 
   saveNewCompleteStory() {
+    this.newCompoleteStory = this.incompStory;
+    console.log(this.missedWords);
+    console.log(this.typeOfInputWords);
 
-    // console.log(regExp.exec(this.incompStory));
-
-    console.log("word1= " + this.word1);
-    console.log("word2= " + this.word2);
-    console.log("word3= " + this.word3);
-
-    this.words.push(this.word1);
-    this.words.push(this.word2);
-    this.words.push(this.word3);
-
-    for (let i: number = 0; i < 3; i++) {
-      // this.newCompoleteStory = this.newCompoleteStory.replace(regExp, this.words[i]);
+    setTimeout(this.checkType, 1000, this.missedWords, this.typeOfInputWords)
+    //Generate new completed story
+    let regExp: RegExp = /\<\<([^>>]+)\>\>/;
+    for (let i = 0; i < this.words.length; i++) {
+      this.newCompoleteStory = this.newCompoleteStory.replace(regExp, this.words[i]);
     }
-
+    //show result for user
     this.isHidden = false;
-
   }
 
-  readCompleteStories() {
-    this.ps.readStories().subscribe(
-      (response: CompleteStory[]) => {
-        this.completedStories = response;
+  checkType(missedWords: string[], typeOfInputWords: string[]) {
+    console.log(missedWords);
+    console.log(typeOfInputWords);
+    for (let i: number = 0; i < missedWords.length; i++) {
+      if (missedWords[i] == typeOfInputWords[i]) {
+        console.log(i);
+        console.log("correct");
+      }
+    }
+  }
+
+  checkWord(event: any, i: number) {
+    // console.log(event);
+    this.wc.getNoun(event.target.value).subscribe(
+      (data: Noun[]) => {
+        // console.log(data);
+        // console.log(this.missedWords[i]);
+        for (var i in data) {
+          //   console.log("data[i].sls");
+          //   console.log(data[i].sls);
+          //   console.log("data[i].orig");
+          //   console.log(data[i].orig);
+          //   console.log("event.target.value");
+          //   console.log(event.target.value);
+          //   console.log("this.missedWords[i]");
+          //   console.log(this.missedWords[i]);
+          if ((data[i].sls == "singular noun" && data[i].orig == event.target.value)) {
+            this.typeOfInputWords.push("singular noun");
+            // console.log("singular");
+          } else if (data[i].sls == "plural noun" && data[i].orig == event.target.value) {
+            this.typeOfInputWords.push("plural noun");
+            // console.log("plural");
+          } else {
+            // console.log("false");
+          }
+        }
+        // if (data == "singular noun") {
+        //   if (this.missedWords[i] == "singular noun") {
+        //     console.log("true");
+        //   } else {
+        //     console.log("false");
+        //   }
+        // } else if (data == "plural noun") {
+        //   if (this.missedWords[i] == "plural noun") {
+        //     console.log("true");
+        //   } else {
+        //     console.log("false");
+        //   }
+        // }
+      },
+      () => {
+        console.log("something went wrong trying to get your word");
       }
     )
-    // Display table by star ranking initially. Have columns sortable?
-    // TODO Display table of short versions of the story for the user to view
-    // TODO When the select the story they want, pop it open in rull view in a
-    // new window.
   }
 
-  saveStoryRanking() {
-    // This starts when the user clicks "Next Story" and the star for 
-    // and the star for that story is checked
-    this.ps.rankStories(this.rankedCompleteStory).subscribe(
-      (response: CompleteStory[]) => {
-        this.completedStories = response;
-      }
-    )
-    // All of the tables come back to be displayed with the new star ranking
-    // added. 
-  }
+  // checkWord(words: string[], missedWords: string[]): boolean {
+  //   let correct: number = 0;
+  //   let i = 0;
+  //   let j = 0;
 
-  checkWord() {
+  //   console.log(missedWords);
+  //   if (words.length == missedWords.length) {
+  //     for (i; i < words.length; i++) {
 
-  }
+  //       this.wc.getNoun1(words[i]).subscribe(
+  //         (data: string) => {
+  //           if ((missedWords[j] == data)) {
+  //             correct++;
+  //           } 
+  //           console.log(missedWords[j]);
+  //           console.log(data);
+  //           j++;
+  //           if ((words.length-1) == correct) { return true; }
+  //         },
+  //         () => {
+  //           console.log("something went wrong trying to get your word");
+  //         }
+
+  //       );
 
 
-  // console.log(word1);
-  // console.log(word2);
-  // console.log(word3);
+  //     }
+
+
+  //   }
+  //   return false;
+  // }
 }
