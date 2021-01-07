@@ -13,8 +13,25 @@ import { StoryCategory } from 'src/app/models/story-category/storycategory';
 
 export class PlayService {
 
+  getMissedType(incompStory: string): string[] {
+    
+    let arr:string[] = new Array();
+    let regExp: RegExp = /\<\<([^>>]+)\>\>/;
+
+    if (incompStory) {
+      while(incompStory.search(regExp) != -1) {
+        arr.push(incompStory.match(regExp)[1]);
+        incompStory = incompStory.replace(regExp, "~");
+      }
+    }
+
+    return arr;
+  }
+
   globals:Globals = new Globals;
   url:string = this.globals.apiURL;
+  // url:string = 'http://localhost:8080/madlibs/';
+
 
   constructor(private http: HttpClient) { }
 
@@ -22,8 +39,12 @@ export class PlayService {
   //   return this.http.get(`${this.url}/incomplete/${category}`) as Observable<IncompleteStory>;
   // }
 
-  getStory(category:StoryCategory): Observable<IncompleteStory> {
-    return this.http.get(`${this.url}/incomplete/${category}`) as Observable<IncompleteStory>;
+  // getStory(category:StoryCategory): Observable<IncompleteStory> {
+  //   return this.http.get(`${this.url}/incomplete/${category}`) as Observable<IncompleteStory>;
+  // }
+
+  getStory(id:number): Observable<IncompleteStory> {
+    return this.http.get<any>('http://localhost:8080/madlibs/game/write/'+id) as Observable<IncompleteStory>;
   }
 
   getCategoryList(): Observable<StoryCategory[]> {

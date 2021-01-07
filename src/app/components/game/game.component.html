@@ -3,6 +3,12 @@
 <div class="container">
   <div id="gameContainer">
     <div class="row">
+      <div clss="col-12">
+        <button id="getComplietedStory" type="button" class="btn btn-primary btn-lg"
+          (click)='startGame()'>Start</button>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-12">
         <h3>Please input the words</h3>
       </div>
@@ -12,18 +18,28 @@
         <p class="form-control-label">Please enter words</p>
       </div>
       <div class="col-4">
-        <input type="text" placeholder="Noun" class="form-control form-control-lg" id="[(ngModel)]=word1">
+        <input type="text" placeholder="Noun" class="form-control form-control-lg" [(ngModel)]='word1'
+          [ngModelOptions]="{standalone: true}"  ng-required="word1" >
       </div>
       <div class="col-4">
-        <input type="text" placeholder="Noun" class="form-control form-control-lg" id="[(ngModel)]=word2">
+        <input type="text" placeholder="Noun" class="form-control form-control-lg" [(ngModel)]='word2'
+          [ngModelOptions]="{standalone: true}" required >
       </div>
       <div class="col-4">
-        <input type="text" placeholder="Noun" class="form-control form-control-lg" id="[(ngModel)]=word3">
+        <input type="text" placeholder="Noun" class="form-control form-control-lg" [(ngModel)]='word3'
+          [ngModelOptions]="{standalone: true}" required >
       </div>
     </div>
     <div class="row">
       <div clss="col-12">
-        <button id="getComplietedStory" type="button" class="btn btn-primary btn-lg" (click)='getStory()'>Get Story</button>
+        <button id="getComplietedStory" type="button" class="btn btn-primary btn-lg"
+          (click)='saveNewCompleteStory()'>Get Story</button>
+      </div>
+    </div>
+    <div id="yourNewStory" class="row"[hidden]="isHidden">
+      <div class="col-12">
+        <h3>Your story:</h3>
+        <p>{{newCompoleteStory}}</p>
       </div>
     </div>
 
