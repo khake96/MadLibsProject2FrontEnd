@@ -9,7 +9,7 @@ import { MenuBarComponent } from 'src/app/components/menu-bar/menu-bar.component
 })
 export class UpdateComponent implements OnInit {
 
-  menu:MenuBarComponent = new MenuBarComponent(); 
+  // menu:MenuBarComponent = new MenuBarComponent(); 
 
   constructor() { }
 
