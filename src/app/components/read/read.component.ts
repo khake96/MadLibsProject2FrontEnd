@@ -10,7 +10,7 @@ import { UpdateComponent } from '../update/update.component';
 })
 export class ReadComponent implements OnInit {
 
-  menu:MenuBarComponent = new MenuBarComponent();  
+  // menu:MenuBarComponent = new MenuBarComponent();  
 
 
   constructor() { }
