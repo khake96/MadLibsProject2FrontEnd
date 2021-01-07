@@ -16,7 +16,7 @@ export class RegistrationService {
 
     console.log(newUserName, fstName, lstName, email, dob, level, passwd1, passwd2);
 
-    return this.http.post<any>("", {userName:newUserName, firstName:fstName,
+    return this.http.post<any>("http://localhost:8083/madlibs/login", {userName:newUserName, firstName:fstName,
                                     lastName:lstName, email:email,  
                                     yob:dob, playerLevel:level,
                                     password1:passwd1,  password2:passwd2}) as Observable<string>;

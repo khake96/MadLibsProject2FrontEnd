@@ -5,6 +5,7 @@ import { Word } from 'src/app/models/word/word';
 import { WordCheckerService } from 'src/app/services/word-checker/word-checker.service';
 import { stringify } from '@angular/compiler/src/util';
 import { Noun } from 'src/app/models/word/noun';
+import { User } from 'src/app/models/user/user';
 
 
 @Component({
@@ -19,6 +20,7 @@ export class LoginComponent implements OnInit {
   public result: string = '';
   public words:Word = null;
   public nouns:Noun = new Noun();
+  public user:User;
 
   constructor(private ls: LoginService, private wc: WordCheckerService, ) { }
 
@@ -33,7 +35,9 @@ export class LoginComponent implements OnInit {
     this.ls.checkLoginBE(this.loginField, this.passwordField).subscribe(
       (data: string) => {
         this.result = data;
-        console.log("success");
+        //this.user = JSON.parse(data);
+        //console.log("user: "+this.user)
+        console.log("success, "+ JSON.parse(data));
       },
       () => {
         this.result = "";
