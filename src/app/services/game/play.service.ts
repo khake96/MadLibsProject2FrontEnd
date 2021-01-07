@@ -35,6 +35,11 @@ export class PlayService {
 
   constructor(private http: HttpClient) { }
 
+  getAllCompletedStories(): Observable<CompleteStory[]>  {
+    return this.http.get<CompleteStory[]>('http://localhost:8080/madlibs/game/read') as Observable<CompleteStory[]>;
+    //as Observable<CompleteStory[];
+  }
+
   // getStory(category:StoryCategory): Observable<IncompleteStory> {
   //   return this.http.get(`${this.url}/incomplete/${category}`) as Observable<IncompleteStory>;
   // }
