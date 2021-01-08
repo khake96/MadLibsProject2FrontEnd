@@ -5,3 +5,56 @@
 .red-field {
     border-color: red;
 }
+
+#getStart {
+    padding: 20px 65px;
+    font-size: 30px;
+    margin-top: 100px;
+}
+
+.my-center {
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+#gameContainer {
+    margin-top: 100px;
+}
+
+#getComplietedStory {
+    padding: 20px 65px;
+    font-size: 30px;
+    margin-top: 20px;
+}
+
+.my-big-title {
+    font-size: 2.75rem;
+    margin-bottom: 30px;
+    color: white;
+}
+
+#gameContainer .row .col-4 {
+    margin-bottom: 10px;
+}
+
+#globalGameContainer {
+    background-image: url('../../../assets/images/loginBackground.jpg');
+    background-size: cover;
+    height: 100vh;
+    margin: 0;
+}
+
+#yourNewStory h3 {
+    color: white;
+    font-size: 40px;
+}
+
+#yourNewStory p {
+    font-size: 25px;
+    color: white;
+}
+
+#yourNewStory {
+    margin-top: 100px;
+}

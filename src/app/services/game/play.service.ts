@@ -62,7 +62,7 @@ export class PlayService {
   }
 
   saveCompleteStory2(story:CompleteStory2): Observable<CompleteStory2> {
-    return this.http.post("http://localhost:8080/madlibs/savestory", story) as Observable<CompleteStory2>;
+    return this.http.post<any>("http://localhost:8080/madlibs/game/savestory", story) as Observable<CompleteStory2>;
   }
 
   readStories(): Observable<CompleteStory[]> {

@@ -4,26 +4,26 @@ export class CompleteStory2 {
 
     constructor() { }
 
-    private _parentStory: IncompleteStory;
-    private _userId: number;
-    private _completedStory: string;
+    private parentStory: number;
+    private userId: number;
+    private completedStory: string;
 
-    public get parentStory(): IncompleteStory {
-        return this._parentStory;
+    public get parentStoryf(): number {
+        return this.parentStory;
     }
-    public set parentStory(value: IncompleteStory) {
-        this._parentStory = value;
+    public set parentStoryf(value: number) {
+        this.parentStory = value;
     }
-    public get userId(): number {
-        return this._userId;
+    public get userIdf(): number {
+        return this.userId;
     }
-    public set userId(value: number) {
-        this._userId = value;
+    public set userIdf(value: number) {
+        this.userId = value;
     }
-    public get completedStory(): string {
-        return this._completedStory;
+    public get completedStoryf(): string {
+        return this.completedStory;
     }
-    public set completedStory(value: string) {
-        this._completedStory = value;
+    public set completedStoryf(value: string) {
+        this.completedStory = value;
     }
 }

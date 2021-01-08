@@ -29,16 +29,19 @@ export class GameComponent implements OnInit {
   public newIncompleteStory: IncompleteStory = new IncompleteStory();
   public newCompoleteStory: string = '';
   public incompStory: string = '';
-  public isHidden: boolean = true;
   public fieldColorStatus: string[] = Array();
   public filledFields: boolean = false;
   public cs: CompleteStory2 = new CompleteStory2();
+  public isHiddenNewStory: boolean = true;
+  public isHiddenGameContainer: boolean = true;
+  public isHiddenGetStart: boolean = false;
 
   constructor(private ps: PlayService, private wc: WordCheckerService, private http: HttpClient) { }
 
   ngOnInit(): void {
-    //Get random story
-    this.ps.getStory(1).subscribe(
+    //Get random story 5-7
+    let r: number = Math.floor(Math.random() * 6) + 1;  // returns a random integer from 1 to 10 
+    this.ps.getStory(r).subscribe(
       (response: IncompleteStory) => {
         this.newIncompleteStory = response;
       }
@@ -46,6 +49,8 @@ export class GameComponent implements OnInit {
   }
 
   startGame() {
+    this.isHiddenGameContainer = false;
+    this.isHiddenGetStart = true;
     //Get incomplete story 
     this.incompStory = this.newIncompleteStory.incompleteStory;
 
@@ -55,144 +60,85 @@ export class GameComponent implements OnInit {
 
   saveNewCompleteStory() {
     this.newCompoleteStory = this.incompStory;
-
-    // this.checkType(this.missedWords, this.typeOfInputWords);
-    // setTimeout(this.checkType, 1500, this.missedWords, this.typeOfInputWords)
-
+    
     //Generate new completed story
-    // setTimeout(function x () {
-    // if (this.filledFields) {
     let regExp: RegExp = /\<\<([^>>]+)\>\>/;
     for (let i = 0; i < this.words.length; i++) {
       this.newCompoleteStory = this.newCompoleteStory.replace(regExp, this.words[i]);
     }
-    //Send completed story to back
-    this.cs.userId = 1;
-    this.cs.completedStory = this.newCompoleteStory;
-    this.cs.parentStory = this.newIncompleteStory;
-    console.log(this.cs);
+    this.cs.userIdf = 1;
+    this.cs.completedStoryf = this.newCompoleteStory;
+    this.cs.parentStoryf = this.newIncompleteStory.storyId;
 
-    this.ps.saveCompleteStory2(this.cs).subscribe(
-      (data: CompleteStory2) => {
-        console.log(data);
-      },
-      () => {
-        console.log("something went wrong sending your story");
-      }
-    );
+    //Check all fields
+    if (this.checkFields(this.fieldColorStatus, this.missedWords)) {
 
+      //Send completed story to server
+      this.ps.saveCompleteStory2(this.cs).subscribe(
+        (data: CompleteStory2) => {
+          console.log(data);
+        },
+        () => {
+          console.log("something went wrong sending your story");
+        }
+      );
 
-    //show result for user
-    this.isHidden = false;
-
-    // } else {
-    //   console.log("Fields don't filled correctly!");
-    //   //Hide result from user
-    //   this.isHidden = true;
-    // }
-    // }, 2000);
-  }
-
-  checkType(missedWords: string[], typeOfInputWords: string[]) {
-    // console.log(missedWords);
-    // console.log(typeOfInputWords);
-    let fieldColorStatus: String[] = [];
-    let correct: number = 0;
-    for (let i: number = 0; i < missedWords.length; i++) {
-      if (missedWords[i] == typeOfInputWords[i]) {
-        correct++;
-        fieldColorStatus.push("green");
-        // console.log(fieldColorStatus);
-      } else {
-        fieldColorStatus.push("red");
-        // console.log(fieldColorStatus);
-      }
-    }
-    if (correct == missedWords.length) {
-      console.log("all fields were filled correctly");
-      this.filledFields = true;
+      //show result for user
+      this.isHiddenNewStory = false;
+      this.isHiddenGameContainer = true;
     } else {
-      console.log("please fill all fields");
-      this.filledFields = false;
+      console.log("fill all fields!");
     }
-    console.log(fieldColorStatus);
   }
+
+  // checkType(missedWords: string[], typeOfInputWords: string[]) {
+  //   let fieldColorStatus: String[] = [];
+  //   let correct: number = 0;
+  //   for (let i: number = 0; i < missedWords.length; i++) {
+  //     if (missedWords[i] == typeOfInputWords[i]) {
+  //       correct++;
+  //       fieldColorStatus.push("green");
+  //     } else {
+  //       fieldColorStatus.push("red");
+  //     }
+  //   }
+  //   if (correct == missedWords.length) {
+  //     console.log("all fields were filled correctly");
+  //     this.filledFields = true;
+  //   } else {
+  //     console.log("please fill all fields");
+  //     this.filledFields = false;
+  //   }
+  // }
 
   checkWord(event: any, i: number) {
-    // console.log(event);
-    this.wc.getNoun(event.target.value).subscribe(
-      (data: Noun[]) => {
-        // console.log(data);
-        // console.log(this.missedWords[i]);
-        for (var i in data) {
-          //   console.log("data[i].sls");
-          //   console.log(data[i].sls);
-          //   console.log("data[i].orig");
-          //   console.log(data[i].orig);
-          //   console.log("event.target.value");
-          //   console.log(event.target.value);
-          //   console.log("this.missedWords[i]");
-          //   console.log(this.missedWords[i]);
-          if ((data[i].sls == "singular noun" && data[i].orig == event.target.value)) {
-            this.typeOfInputWords.push("singular noun");
-            // console.log("singular");
-          } else if (data[i].sls == "plural noun" && data[i].orig == event.target.value) {
-            this.typeOfInputWords.push("plural noun");
-            // console.log("plural");
-          } else {
-            // console.log("false");
-          }
+    console.log(this.fieldColorStatus.length);
+    this.wc.getWord(event.target.value).subscribe(
+      (data: boolean) => {
+        if (data) {
+          this.fieldColorStatus[i] = "green";
+          console.log(this.fieldColorStatus);
+        } else {
+          this.fieldColorStatus[i] = "red";
+          console.log(this.fieldColorStatus);
         }
-        // if (data == "singular noun") {
-        //   if (this.missedWords[i] == "singular noun") {
-        //     console.log("true");
-        //   } else {
-        //     console.log("false");
-        //   }
-        // } else if (data == "plural noun") {
-        //   if (this.missedWords[i] == "plural noun") {
-        //     console.log("true");
-        //   } else {
-        //     console.log("false");
-        //   }
-        // }
       },
       () => {
-        console.log("something went wrong trying to get your word");
+        console.log("something went wrong trying to get your word from API");
       }
     )
+
   }
 
-  // checkWord(words: string[], missedWords: string[]): boolean {
-  //   let correct: number = 0;
-  //   let i = 0;
-  //   let j = 0;
-
-  //   console.log(missedWords);
-  //   if (words.length == missedWords.length) {
-  //     for (i; i < words.length; i++) {
-
-  //       this.wc.getNoun1(words[i]).subscribe(
-  //         (data: string) => {
-  //           if ((missedWords[j] == data)) {
-  //             correct++;
-  //           } 
-  //           console.log(missedWords[j]);
-  //           console.log(data);
-  //           j++;
-  //           if ((words.length-1) == correct) { return true; }
-  //         },
-  //         () => {
-  //           console.log("something went wrong trying to get your word");
-  //         }
-
-  //       );
-
-
-  //     }
-
-
-  //   }
-  //   return false;
-  // }
+  checkFields(fieldColorStatus: string[], missedWords: string[]): boolean {
+    if (fieldColorStatus.length != missedWords.length) {
+      return false;
+    }
+    for (let str of fieldColorStatus) {
+      if (str != "green") {
+        return false;
+      }
+    }
+    return true;
+  }
 }

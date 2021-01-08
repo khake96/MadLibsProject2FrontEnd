@@ -31,6 +31,25 @@ export class WordCheckerService {
     return this.http.get<any>('https://dictionaryapi.com/api/v3/references/thesaurus/json/' + word + '?key=e618ff16-ba5b-484a-8f1c-7c0928281c22') as Observable<Word>;
   }
 
+
+  getWord(word: string) {
+    return this.getThesaurusAPI(word).pipe(map(
+      (data: Word) => {
+        console.log(data);
+        if (data[5]) {
+          return true;
+        } else {
+          return false;
+        }
+      },
+      () => {
+        this.words = null;
+        console.log("something went wrong trying to get your word");
+      }
+    ))
+  }
+
+
   getNoun(word: string) {
     return this.getThesaurusAPI(word).pipe(map(
       (data: Word) => {
@@ -61,48 +80,7 @@ export class WordCheckerService {
         console.log("something went wrong trying to get your word");
       }
     ))
-    // return this.nounsArr;
   }
-
-  // getNoun1(word: string) {
-  //   let result:string = '';
-  //   return this.getThesaurusAPI(word).pipe(map(
-  //     (data: Word) => {
-  //       for (var i in data) {
-  //         if (data[i].fl == "noun") {
-  //           if (data[i].sls) {
-  //             return "plural noun";
-  //           } else {
-  //             return "singular noun";
-  //           }
-  //         }
-  //       }
-  //     },
-  //     () => {
-  //       console.log("something went wrong trying to get your word");
-  //     }
-  //   ))
-  // }
-
-  // getNoun2(word: string) {
-  //   let result:string = '';
-  //   return this.getThesaurusAPI(word).subscribe(
-  //     (data: Word) => {
-  //       for (var i in data) {
-  //         if (data[i].fl == "noun") {
-  //           if (data[i].sls) {
-  //             return "plural noun";
-  //           } else {
-  //             return "singular noun";
-  //           }
-  //         }
-  //       }
-  //     },
-  //     () => {
-  //       console.log("something went wrong trying to get your word");
-  //     }
-  //   )
-  // }
 
   getVerb(word: string): Verb[] {
     this.getThesaurusAPI(word).subscribe(
