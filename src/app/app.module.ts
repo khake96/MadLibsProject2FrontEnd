@@ -13,6 +13,7 @@ import { CategorySelectorComponent } from './components/category-selector/catego
 import { GameComponent } from './components/game/game.component';
 import { ReadComponent } from './components/read/read.component';
 import { UpdateComponent } from './components/update/update.component';
+import { LogoutComponent } from './models/logout/logout/logout.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UpdateComponent } from './components/update/update.component';
     CategorySelectorComponent,
     GameComponent,
     ReadComponent,
-    UpdateComponent
+    UpdateComponent,
+    LogoutComponent
   ],
   imports: [
     BrowserModule,

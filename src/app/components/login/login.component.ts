@@ -6,6 +6,10 @@ import { WordCheckerService } from 'src/app/services/word-checker/word-checker.s
 import { stringify } from '@angular/compiler/src/util';
 import { Noun } from 'src/app/models/word/noun';
 import { User } from 'src/app/models/user/user';
+import { User2 } from 'src/app/models/user/user2';
+import { GameComponent } from '../game/game.component';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -22,7 +26,7 @@ export class LoginComponent implements OnInit {
   public nouns:Noun = new Noun();
   public user:User;
 
-  constructor(private ls: LoginService, private wc: WordCheckerService, ) { }
+  constructor(private ls: LoginService, private wc: WordCheckerService, private route: ActivatedRoute, private router: Router, private cookieService:CookieService) { }
 
   ngOnInit(): void {
 
@@ -37,8 +41,26 @@ export class LoginComponent implements OnInit {
         this.result = data;
         //this.user = JSON.parse(data);
         //console.log("user: "+this.user)
-        console.log(data);
+        // console.log(data);
         console.log("success");
+      },
+      () => {
+        this.result = "";
+        console.log("something went wrong checking your login and password.");
+      }
+    )
+  }
+
+  checkLogin2(): void {
+    this.ls.checkLoginBE2(this.loginField, this.passwordField).subscribe(
+      (data: any) => {
+        this.cookieService.set('user_id', data.user_id);
+        console.log("success");
+        if (data) {
+          this.router.navigate(['/game']);
+        }else {
+          console.log("incorrect login or password");
+        }
       },
       () => {
         this.result = "";

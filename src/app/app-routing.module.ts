@@ -5,6 +5,7 @@ import { RegistrationComponent } from './components/registration/registration.co
 import { GameComponent } from './components/game/game.component';
 import { UpdateComponent } from './components/update/update.component';
 import { ReadComponent } from './components/read/read.component';
+import { LogoutComponent } from './models/logout/logout/logout.component';
 
 const routes: Routes = [
   { path: '', redirectTo: '/login', pathMatch: 'full' },
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path:'read',
     component:ReadComponent
+  },
+  {
+    path:'logout',
+    component:LogoutComponent
   }
 ];
 
