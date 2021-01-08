@@ -100,6 +100,10 @@ export class GameComponent implements OnInit {
     }
   }
 
+  public restart() {
+    location.reload();
+  }
+
   // checkType(missedWords: string[], typeOfInputWords: string[]) {
   //   let fieldColorStatus: String[] = [];
   //   let correct: number = 0;
