@@ -21,12 +21,12 @@ export class LoginService {
 
   checkLoginBE(login:string, pass:string) {
     //console.log(login, pass);
-    return this.http.post<any>("http://localhost:8083/madlibs/login", {userName:login, pword:pass, withCredentials: true}) as Observable<string>;
+    return this.http.post<any>("http://localhost:8080/madlibs/login", {userName:login, pword:pass, withCredentials: true}) as Observable<string>;
   }
 
   logout() {
     //console.log(login, pass);
-    return this.http.post<any>("http://localhost:8083/madlibs/login/done", {withCredentials: true}) as Observable<string>;
+    return this.http.post<any>("http://localhost:8080/madlibs/login/done", {withCredentials: true}) as Observable<string>;
   }
   
 }

@@ -1,4 +1,3 @@
-
 import { Component, OnInit } from '@angular/core';
 import { RegistrationService } from 'src/app/services/registration/registration.service';
 
