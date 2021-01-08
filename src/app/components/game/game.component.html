@@ -19,8 +19,9 @@
       </div>
       <div class="col-4" *ngFor="let mw of missedWords; index as i; first as isFirst; last as isLast">
         <input type="text" placeholder={{mw}} (change)="checkWord($event, i)" class="form-control form-control-lg" [(ngModel)]='words[i]'
-          [ngModelOptions]="{standalone: true}"  ng-required="word1" >
+          [ngModelOptions]="{standalone: true}"  ng-required="word" [ngClass]="{ 'green-field':words[i]=='green', 'red-field':words[i]=='red'}" >
       </div>
+      
       <!-- <div class="col-4">
         <input type="text" placeholder="Noun" class="form-control form-control-lg" [(ngModel)]='word2'
           [ngModelOptions]="{standalone: true}" required >

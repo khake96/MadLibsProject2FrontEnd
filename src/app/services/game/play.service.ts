@@ -5,6 +5,7 @@ import { Globals } from 'src/app/globals';
 import { CompleteStory } from 'src/app/models/complete-story/completestory';
 import { IncompleteStory } from 'src/app/models/incomplete-story/incompletestory';
 import { StoryCategory } from 'src/app/models/story-category/storycategory';
+import { CompleteStory2 } from 'src/app/models/complete-story-2/complete-story2';
 
 
 @Injectable({
@@ -58,6 +59,10 @@ export class PlayService {
 
   saveCompleteStory(story:CompleteStory): Observable<CompleteStory> {
     return this.http.post(`${this.url}/complete`, story) as Observable<CompleteStory>;
+  }
+
+  saveCompleteStory2(story:CompleteStory2): Observable<CompleteStory2> {
+    return this.http.post("http://localhost:8080/madlibs/savestory", story) as Observable<CompleteStory2>;
   }
 
   readStories(): Observable<CompleteStory[]> {

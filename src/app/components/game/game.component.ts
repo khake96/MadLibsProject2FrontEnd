@@ -10,6 +10,8 @@ import { stringify } from '@angular/compiler/src/util';
 import { HttpClient } from '@angular/common/http';
 import { WordCheckerService } from 'src/app/services/word-checker/word-checker.service';
 import { Noun } from 'src/app/models/word/noun';
+import { CssSelector } from '@angular/compiler';
+import { CompleteStory2 } from 'src/app/models/complete-story-2/complete-story2';
 
 @Component({
   selector: 'app-game',
@@ -28,6 +30,9 @@ export class GameComponent implements OnInit {
   public newCompoleteStory: string = '';
   public incompStory: string = '';
   public isHidden: boolean = true;
+  public fieldColorStatus: string[] = Array();
+  public filledFields: boolean = false;
+  public cs: CompleteStory2 = new CompleteStory2();
 
   constructor(private ps: PlayService, private wc: WordCheckerService, private http: HttpClient) { }
 
@@ -38,14 +43,9 @@ export class GameComponent implements OnInit {
         this.newIncompleteStory = response;
       }
     )
-
-    if (this.words[0] == "lol") {
-      console.log("lol");
-    }
   }
 
   startGame() {
-    console.log(this.wc.getNoun("components"));
     //Get incomplete story 
     this.incompStory = this.newIncompleteStory.incompleteStory;
 
@@ -55,28 +55,67 @@ export class GameComponent implements OnInit {
 
   saveNewCompleteStory() {
     this.newCompoleteStory = this.incompStory;
-    console.log(this.missedWords);
-    console.log(this.typeOfInputWords);
 
-    setTimeout(this.checkType, 1000, this.missedWords, this.typeOfInputWords)
+    // this.checkType(this.missedWords, this.typeOfInputWords);
+    // setTimeout(this.checkType, 1500, this.missedWords, this.typeOfInputWords)
+
     //Generate new completed story
+    // setTimeout(function x () {
+    // if (this.filledFields) {
     let regExp: RegExp = /\<\<([^>>]+)\>\>/;
     for (let i = 0; i < this.words.length; i++) {
       this.newCompoleteStory = this.newCompoleteStory.replace(regExp, this.words[i]);
     }
+    //Send completed story to back
+    this.cs.userId = 1;
+    this.cs.completedStory = this.newCompoleteStory;
+    this.cs.parentStory = this.newIncompleteStory;
+    console.log(this.cs);
+
+    this.ps.saveCompleteStory2(this.cs).subscribe(
+      (data: CompleteStory2) => {
+        console.log(data);
+      },
+      () => {
+        console.log("something went wrong sending your story");
+      }
+    );
+
+
     //show result for user
     this.isHidden = false;
+
+    // } else {
+    //   console.log("Fields don't filled correctly!");
+    //   //Hide result from user
+    //   this.isHidden = true;
+    // }
+    // }, 2000);
   }
 
   checkType(missedWords: string[], typeOfInputWords: string[]) {
-    console.log(missedWords);
-    console.log(typeOfInputWords);
+    // console.log(missedWords);
+    // console.log(typeOfInputWords);
+    let fieldColorStatus: String[] = [];
+    let correct: number = 0;
     for (let i: number = 0; i < missedWords.length; i++) {
       if (missedWords[i] == typeOfInputWords[i]) {
-        console.log(i);
-        console.log("correct");
+        correct++;
+        fieldColorStatus.push("green");
+        // console.log(fieldColorStatus);
+      } else {
+        fieldColorStatus.push("red");
+        // console.log(fieldColorStatus);
       }
     }
+    if (correct == missedWords.length) {
+      console.log("all fields were filled correctly");
+      this.filledFields = true;
+    } else {
+      console.log("please fill all fields");
+      this.filledFields = false;
+    }
+    console.log(fieldColorStatus);
   }
 
   checkWord(event: any, i: number) {
