@@ -37,11 +37,7 @@ export class LoginComponent implements OnInit {
         this.result = data;
         //this.user = JSON.parse(data);
         //console.log("user: "+this.user)
-       // console.log("success, "+ JSON.parse(data));
-      console.log("success  ");
-    //  console.log("alert('successful')");
-     // console.log(alert("Hello World!"););
-
+        console.log("success");
       },
       () => {
         this.result = "";
