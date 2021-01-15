@@ -19,7 +19,7 @@ export class ReadComponent implements OnInit {
 
   // menu:MenuBarComponent = new MenuBarComponent();  
   public completeStories:CompleteStory3[] = Array();
-  public headers:string[] = ["_completedStoryId", "_authorBook", "_authorFirstName", "_authorLastName", "_completedStory", , "_originalStory"]
+  public headers:string[] = ["_authorBook", "_authorFirstName", "_authorLastName", "_completedStory", , "_originalStory"]
 
   constructor(private cookieService:CookieService, private router: Router, private ps: PlayService, private http: HttpClient) { }
 
