@@ -12,6 +12,9 @@ import { WordCheckerService } from 'src/app/services/word-checker/word-checker.s
 import { Noun } from 'src/app/models/word/noun';
 import { CssSelector } from '@angular/compiler';
 import { CompleteStory2 } from 'src/app/models/complete-story-2/complete-story2';
+import { CookieService } from 'ngx-cookie-service';
+import { Router } from '@angular/router';
+// import {CookieService} from '@angular/common/http/ngx-cookie-service';
 
 @Component({
   selector: 'app-game',
@@ -35,10 +38,15 @@ export class GameComponent implements OnInit {
   public isHiddenNewStory: boolean = true;
   public isHiddenGameContainer: boolean = true;
   public isHiddenGetStart: boolean = false;
+  
 
-  constructor(private ps: PlayService, private wc: WordCheckerService, private http: HttpClient) { }
+  constructor(private ps: PlayService, private wc: WordCheckerService, private http: HttpClient, private cookieService:CookieService, private router: Router) { }
 
   ngOnInit(): void {
+
+    if (!this.cookieService.get('user_id')) {
+      this.router.navigate(['/login']);
+    }
     //Get random story 5-7
     let r: number = Math.floor(Math.random() * 6) + 1;  // returns a random integer from 1 to 10 
     this.ps.getStory(r).subscribe(
@@ -46,6 +54,7 @@ export class GameComponent implements OnInit {
         this.newIncompleteStory = response;
       }
     )
+    // console.log(this.cookieService.get('user_id'));
   }
 
   startGame() {
@@ -66,7 +75,7 @@ export class GameComponent implements OnInit {
     for (let i = 0; i < this.words.length; i++) {
       this.newCompoleteStory = this.newCompoleteStory.replace(regExp, this.words[i]);
     }
-    this.cs.userIdf = 1;
+    this.cs.userIdf = +this.cookieService.get('user_id');
     this.cs.completedStoryf = this.newCompoleteStory;
     this.cs.parentStoryf = this.newIncompleteStory.storyId;
 
@@ -89,6 +98,10 @@ export class GameComponent implements OnInit {
     } else {
       console.log("fill all fields!");
     }
+  }
+
+  public restart() {
+    location.reload();
   }
 
   // checkType(missedWords: string[], typeOfInputWords: string[]) {

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { Routes, RouterModule, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { MenuBarComponent } from 'src/app/components/menu-bar/menu-bar.component';
 import { UpdateService } from 'src/app/services/update/update.service';
 
@@ -13,6 +14,9 @@ export class UpdateComponent implements OnInit {
   // menu:MenuBarComponent = new MenuBarComponent(); 
 
   ngOnInit(): void {
+    if (!this.cookieService.get('user_id')) {
+      this.router.navigate(['/login']);
+    }
   }
 
 
@@ -24,7 +28,7 @@ export class UpdateComponent implements OnInit {
   
   public result:string = ''; 
 
-  constructor(private us:UpdateService) { }
+  constructor(private us:UpdateService, private cookieService:CookieService, private router: Router) { }
 
  
 

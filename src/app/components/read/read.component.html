@@ -1,3 +1,23 @@
 <app-menu-bar></app-menu-bar>
 
 
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <!-- <th>Story Id</th> -->
+            <th>Author Book</th>
+            <th>Author First Name</th>
+            <th>Author Last Name</th>
+            <th>Completed Story</th>
+            <th></th>
+            <th>Original Story</th>
+        </tr>
+    <tbody >
+        <tr *ngFor="let row of completeStories">
+            <td *ngFor="let column of headers"> 
+                {{row[column]}}
+            </td>
+           
+        </tr>
+    </tbody>
+</table>

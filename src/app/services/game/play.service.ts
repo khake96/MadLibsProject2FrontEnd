@@ -70,6 +70,11 @@ export class PlayService {
     return this.http.get(`${this.url}/read`) as Observable<CompleteStory[]>;
   }
 
+  readStories2(): Observable<CompleteStory[]> {
+    // return this.http.get(`${this.url}/read`) as Observable<CompleteStory[]>;
+    return this.http.get<any>("http://localhost:8080/madlibs/game/read") as Observable<CompleteStory[]>;
+  }
+
   rankStories(story:CompleteStory): Observable<CompleteStory[]> {
     return this.http.patch(`${this.url}/updaterank`, story) as Observable<CompleteStory[]>;
   }
