@@ -1,6 +1,6 @@
 # MadLibsProject2BackEnd
 
-# MadLibs
+# Project Description
 
 Madlibs is a fun learning tool for people who want to improve their English skills.  Once registered and logged in, 
 you can select an age appropriate passage and be prompted for missing words.  After completing all the prompts 
@@ -34,3 +34,9 @@ Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app w
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+ ## Contributors
+ - A. Kulikov
+ - C. Svensson
+ - A. Palaparthi
+ - K. Hake
